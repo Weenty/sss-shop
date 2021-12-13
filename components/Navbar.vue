@@ -8,7 +8,7 @@
         <div class="button-catalog">Catalogy</div>
       </div>
       <div class="col"><div class="button-profile">Profile</div></div>
-      <div class="col"><div class="button-backet">Bascket<a v-if="backet!==0">({{bascket}})</a></div></div>
+      <div class="col"><div class="button-backet">Basket <a v-if="basket!==0">({{basket}}) </a></div></div>
     </div>
     <div class="line" />
     
@@ -18,7 +18,7 @@
 export default {
   data() {
     return {
-      bascket: 2,
+      basket: 2,
     }
   }
 }
@@ -64,7 +64,7 @@ export default {
   line-height: 22px;
   color: #000000;
 }
-@media (max-width: 443px) {
+@media (max-width: 467px) {
     .logo {
       display: none;
     }
