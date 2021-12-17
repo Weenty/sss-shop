@@ -24,7 +24,7 @@
           >
             <b-dropdown-item
               v-for="(dropdown, index) in dropdowns"
-              :key="dropdown"
+              :key="index"
               :value="index"
               @click="clicked(index, 1)"
               >{{ dropdowns[1][index] }}</b-dropdown-item
@@ -44,7 +44,7 @@
           >
             <b-dropdown-item
               v-for="(dropdown, index) in dropdowns"
-              :key="dropdown"
+              :key="index"
               @click="clicked(index, 2)"
               >{{ dropdowns[2][index] }}</b-dropdown-item
             >

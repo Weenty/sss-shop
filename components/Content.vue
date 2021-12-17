@@ -5,10 +5,10 @@
       {{ hight_text }}:
       <div>{{ count }}</div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div
         v-for="(card, index) in filteredProducts"
-        :key="card"
+        :key="index"
         :class="{
           'col-xl-3 col-lg-4 col-md-6 col-auto col-sm-auto':
             index !== 2,
@@ -94,7 +94,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div v-else id="notFounded" class="container">
     Not Found
