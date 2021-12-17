@@ -3,22 +3,13 @@
     <div class="row" style="padding-top: 5.5%">
       <div id="panel-text" class="col-xl-3">
         Search
-        <div>
-          <b-dropdown
-            id="dropdown-left"
-            :text="dropdown1"
-            variant="light"
-            class="m-2"
-            style="width: 100%; height: 61px;"
+        <div style="width: 100%; height: 61px; margin-top: 10px;">
+          <input
+            v-model="text"
+            class="Search"
+            placeholder="Converse"
+            type="text"
           >
-            <b-dropdown-item
-              v-for="(dropdown, index) in dropdowns"
-              :key="dropdown"
-              :value="index"
-              @click="clicked(index, 0)"
-              >{{ dropdowns[0][index] }}</b-dropdown-item
-            >
-          </b-dropdown>
         </div>
       </div>
       <div id="panel-text" class="col-xl-3">
@@ -29,7 +20,7 @@
             :text="dropdown2"
             variant="light"
             class="m-2"
-            style="width: 100%; height: 61px;"
+            style="width: 100%; height: 61px"
           >
             <b-dropdown-item
               v-for="(dropdown, index) in dropdowns"
@@ -49,12 +40,11 @@
             :text="dropdown3"
             variant="light"
             class="m-2"
-            style="width: 100%; height: 61px;"
+            style="width: 100%; height: 61px"
           >
             <b-dropdown-item
               v-for="(dropdown, index) in dropdowns"
               :key="dropdown"
-              :value="index"
               @click="clicked(index, 2)"
               >{{ dropdowns[2][index] }}</b-dropdown-item
             >
@@ -62,7 +52,7 @@
         </div>
       </div>
       <div id="panel-text" class="col-xl-3">
-        <button class="apply-button">Apply</button>
+        <button class="apply-button" @click="SORT(text, dropdown2, dropdown3)">Apply</button>
       </div>
     </div>
   </div>
@@ -73,17 +63,14 @@ export default {
   data() {
     return {
       dropdowns: "",
-      dropdown1: "",
       dropdown2: "",
       dropdown3: "",
+      text: "",
     };
   },
   methods: {
     clicked(index, number) {
       switch (number) {
-        case 0:
-          this.dropdown1 = this.dropdowns[number][index];
-          break;
         case 1:
           this.dropdown2 = this.dropdowns[number][index];
           break;
@@ -92,21 +79,38 @@ export default {
           break;
       }
     },
+    SORT(text, category, sale) {
+      this.$root.$refs.Content_component.SORT(text, category, sale);
+    }
   },
   mounted() {
     this.dropdowns = [
       ["первый", "второй", "третий"],
-      ["первый", "второй", "третий"],
-      ["первый", "второй", "третий"],
+      ["All", "второй", "Sneakers"],
+      ["BestSellers"],
     ];
-    this.dropdown1 = this.dropdowns[0][0];
-    this.dropdown2 = this.dropdowns[1][1];
-    this.dropdown3 = this.dropdowns[2][2];
+    this.dropdown2 = this.dropdowns[1][0];
+    this.dropdown3 = this.dropdowns[2][0];
   },
 };
 </script>
 
 <style scoped>
+.Search {
+  background-color: #f5f5f5;
+  border-inline: none;
+  border-block: none;
+  outline: none;
+  width: 100%;
+  height: 61px;
+  padding-left: 30px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
 #panel-text {
   font-family: Inter;
   font-style: normal;
@@ -132,6 +136,10 @@ export default {
   #panel-text {
     text-align: center;
     padding-top: 5%;
+  }
+  .Search {
+    text-align: center;
+    padding-left: 0px;
   }
 }
 </style>

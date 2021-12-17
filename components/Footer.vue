@@ -2,10 +2,10 @@
   <div class="Footer">
     <div class="container"> 
         <div class="row">
-            <div class="col" style="padding-top: 40px">
+            <div class="col" style="padding-top: 30px">
                 S-SHOP
             </div>
-            <div class="col-8 col-md-10 col-lg-10 col-sm-9" style="word-spacing: 20px; padding-top: 40px">
+            <div class="col-9 col-md-10 col-lg-10 col-sm-9" style="word-spacing: 20px; padding-top: 30px">
                 Contacts Copyright
             </div>
         </div>
@@ -16,7 +16,7 @@
 <style scoped>
 .Footer {
   width: 100%;
-  height: 110px;
+  height: 80px;
   background-color: black;
   margin-top: 10%;
 }
