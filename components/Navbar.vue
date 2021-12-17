@@ -8,10 +8,13 @@
         <div class="button-catalog">Catalogy</div>
       </div>
       <div class="col"><div class="button-profile">Profile</div></div>
-      <div class="col"><div class="button-backet">Basket <a v-if="basket!==0">({{basket}}) </a></div></div>
+      <div class="col">
+        <button @click="visible = !visible" class="button-backet">
+          Basket <a v-if="basket !== 0">({{ basket }}) </a>
+        </button>
+      </div>
     </div>
     <div class="line" />
-    
   </div>
 </template>
 <script>
@@ -19,9 +22,10 @@ export default {
   data() {
     return {
       basket: 2,
-    }
-  }
-}
+      visible: false,
+    };
+  },
+};
 </script>
 <style scoped>
 #nav-text {
@@ -29,7 +33,7 @@ export default {
 }
 .line {
   width: 100%;
-  border: 1px solid #BDBDBD;
+  border: 1px solid #bdbdbd;
   margin-top: 2.5%;
 }
 .logo {
@@ -46,7 +50,7 @@ export default {
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
-  color: #FF6B00 
+  color: #ff6b00;
 }
 .button-profile {
   font-family: Inter;
@@ -57,6 +61,9 @@ export default {
   color: #000000;
 }
 .button-backet {
+  outline: none;
+  border: 0;
+  background: transparent;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
@@ -65,11 +72,11 @@ export default {
   color: #000000;
 }
 @media (max-width: 467px) {
-    .logo {
-      display: none;
-    }
-    #logo-hide {
-      display: none;
-    }
+  .logo {
+    display: none;
+  }
+  #logo-hide {
+    display: none;
+  }
 }
 </style>
