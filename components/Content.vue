@@ -1,5 +1,6 @@
 <template>
-    <div v-if="nonContent" class="container" style="margin-top:10%">
+  <div>
+    <div v-if="nonContent" class="container" style="margin-top: 10%">
       <div class="hight-text">
         {{ hight_text }}:
         <div class="count">{{ count }}</div>
@@ -11,7 +12,8 @@
           :class="{
             'col-xl-3 col-lg-4 col-md-6 col-auto col-sm-auto': index !== 2,
             'col-xl-6 col-lg-4 col-md-6 col-auto col-sm-auto': index == 2,
-            'col-xl-3 col-lg-4 col-md-6 col-auto col-sm-auto card-pad': (index == 0 || index == 1) && Sortedproducts.length>=3,
+            'col-xl-3 col-lg-4 col-md-6 col-auto col-sm-auto card-pad':
+              (index == 0 || index == 1) && Sortedproducts.length >= 3,
           }"
           style="padding-top: 30px"
         >
@@ -96,13 +98,14 @@
       </div>
     </div>
     <div v-else id="notFounded" class="container">Not Found</div>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      hight_text: 'All',
+      hight_text: "All",
       Sortedproducts: [],
       cards: [
         {
@@ -186,25 +189,26 @@ export default {
           contex.Sortedproducts.push(item);
         }
       });
-      this.hight_text = category
-      if(text!=='' && text!==0 && text!==undefined) {
-        let arr = text.split(' ')
-      let bufer = contex.Sortedproducts
-      contex.Sortedproducts = bufer.filter(item=>{
-        if(item.name.split(' ').some((item1,index)=>{
-          return String(item1)==String(arr[index])
-        }))
-        {
-          return item
-        }
-      })
-      this.hight_text = 'Результаты по ' + text
+      this.hight_text = category;
+      if (text !== "" && text !== 0 && text !== undefined) {
+        let arr = text.split(" ");
+        let bufer = contex.Sortedproducts;
+        contex.Sortedproducts = bufer.filter((item) => {
+          if (
+            item.name.split(" ").some((item1, index) => {
+              return String(item1) == String(arr[index]);
+            })
+          ) {
+            return item;
+          }
+        });
+        this.hight_text = "Результаты по " + text;
       }
     },
   },
   computed: {
     count() {
-      return this.Sortedproducts.length
+      return this.Sortedproducts.length;
     },
     nonContent() {
       return this.Sortedproducts.length !== 0 ? true : false;
