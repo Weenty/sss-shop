@@ -15,7 +15,7 @@
         >
           Basket <a v-if="basket !== 0">({{ basket }}) </a>
         </button>
-        <!-- <modal
+        <modal
           name="my-modal"
           :width="455"
           :height="790"
@@ -70,7 +70,7 @@
               </div>
             </div>
           </div>
-        </modal> -->
+        </modal>
       </div>
     </div>
     <div class="line" />

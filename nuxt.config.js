@@ -35,7 +35,9 @@ export default {
     '@nuxtjs/pwa',
     'bootstrap-vue/nuxt'
   ],
-
+  bootstrapVue: {
+    icons: false
+    },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

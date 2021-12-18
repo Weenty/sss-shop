@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container" style="margin-top: 10%">
+    <div v-if="nonContent" class="container" style="margin-top: 10%">
       <div class="hight-text">
         {{ hight_text }}:
         <div class="count">{{ count }}</div>
@@ -97,7 +97,7 @@
         </div>
       </div>
     </div>
-    <!-- <div v-else id="notFounded" class="container">Not Found</div> -->
+    <div v-else id="notFounded" class="container">Not Found</div>
   </div>
 </template>
 
