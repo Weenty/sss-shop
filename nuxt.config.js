@@ -38,7 +38,8 @@ export default {
   bootstrapVue: {
     icons: false
     },
-
+    extend(config, ctx) {},
+    babel: { compact: true },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
