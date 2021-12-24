@@ -10,12 +10,13 @@
       <div class="col"><div class="button-profile">Profile</div></div>
       <div class="col">
         <button
-          @click="[$modal.show('my-modal')]"
+          @click="showm()"
           class="button-backet"
         >
           Basket <a v-if="basket !== 0">({{ basket }}) </a>
         </button>
         <modal
+        v-if="showModal"
           name="my-modal"
           :width="455"
           :height="790"
@@ -81,8 +82,17 @@ export default {
   data() {
     return {
       basket: 2,
+      showModal: false,
     };
   },
+  methods: {
+    showm() {
+      this.showModal = true
+      this.$nextTick(()=> {
+      this.$modal.show('my-modal')
+      })
+    },
+  }
 };
 </script>
 <style scoped>
