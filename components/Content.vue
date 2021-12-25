@@ -28,14 +28,15 @@
               <div class="Sale-text">Sale -{{ card.Sale }}%</div>
             </div>
             <div class="card-text">{{ card.name }}</div>
-            <div class="card-price">{{ card.price }}</div>
+            <div class="card-price">${{ card.price }}</div>
             <div v-if="index == 2">
               <div class="row">
                 <div class="col-xl-6">
                   <button
+                    v-if="locked(card.uid)"
                     class="card-button"
                     :id="card.uid"
-                    @click="Add(card.uid)"
+                    @click="[Add(card.uid), lock(card.uid)]"
                     :class="{ active: false }"
                   >
                     <div class="row">
@@ -60,15 +61,41 @@
                       </div>
                     </div>
                   </button>
+                  <button
+                    class="card-button-white"
+                    v-else
+                    @click="[unlock(card.uid), remove(card.uid)]"
+                  >
+                    <div class="row">
+                      <div class="col-8">
+                        <div>Added</div>
+                      </div>
+                      <div class="col">
+                        <svg
+                          width="16"
+                          height="13"
+                          viewBox="0 0 16 13"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 6L6 11L15 1"
+                            stroke="black"
+                            stroke-width="1.5"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
             <div v-else>
               <button
+                v-if="locked(card.uid)"
                 class="card-button"
                 :id="card.uid"
-                @click="Add(card.uid)"
-                :class="{ active: false }"
+                @click="[Add(card.uid), lock(card.uid)]"
               >
                 <div class="row">
                   <div class="col-8">
@@ -92,6 +119,32 @@
                   </div>
                 </div>
               </button>
+              <button
+                class="card-button-white"
+                v-else
+                @click="[unlock(card.uid), remove(card.uid)]"
+              >
+                <div class="row">
+                  <div class="col-8">
+                    <div>Added</div>
+                  </div>
+                  <div class="col">
+                    <svg
+                      width="16"
+                      height="13"
+                      viewBox="0 0 16 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1 6L6 11L15 1"
+                        stroke="black"
+                        stroke-width="1.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -107,67 +160,68 @@ export default {
     return {
       hight_text: "All",
       Sortedproducts: [],
+      button_lock: [],
       cards: [
         {
-          uid: "gorgpoh=340343",
+          uid: "1",
           name: "123",
-          price: "49,99$",
+          price: "49.99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
-          Sale: 35,
+          Sale: 4,
         },
         {
-          uid: "gpoigtref-54",
+          uid: "2",
           name: "Converse Kids 70",
-          price: "49,99$",
-          img: "iugQZtch-fg.jpg",
-          category: "Sneakers",
-          Sale: 2,
-        },
-        {
-          uid: "gpoigtref-54",
-          name: "Converse Kids 70",
-          price: "49,99$",
+          price: "49.99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
           Sale: 2,
         },
         {
-          uid: "gpoigtref-54",
+          uid: "3",
           name: "Converse Kids 70",
-          price: "49,99$",
+          price: "49.99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
           Sale: 2,
         },
         {
-          uid: "gpoigtref-54",
+          uid: "4",
           name: "Converse Kids 70",
-          price: "49,99$",
+          price: "49.99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
           Sale: 2,
         },
         {
-          uid: "gpoigtref-54",
+          uid: "5",
           name: "Converse Kids 70",
-          price: "49,99$",
+          price: "49.99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
           Sale: 2,
         },
         {
-          uid: "gpoigtref-54",
+          uid: "6",
           name: "Converse Kids 70",
-          price: "49,99$",
+          price: "49.99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
           Sale: 2,
         },
         {
-          uid: "gpoigtref-54",
+          uid: "7",
           name: "Converse Kids 70",
-          price: "49,99$",
+          price: "49.99",
+          img: "iugQZtch-fg.jpg",
+          category: "Sneakers",
+          Sale: 2,
+        },
+        {
+          uid: "8",
+          name: "Converse Kids 70",
+          price: "49,99",
           img: "iugQZtch-fg.jpg",
           category: "Sneakers",
           Sale: 2,
@@ -176,7 +230,32 @@ export default {
     };
   },
   methods: {
-    Add(uid) {},
+    removeAll() {
+      this.button_lock = [];
+    },
+    unlock(uid) {
+      this.button_lock.splice(this.button_lock.indexOf(uid), 1);
+    },
+    locked(uid) {
+      return this.button_lock.indexOf(uid) == -1;
+    },
+    lock(uid) {
+      if (this.button_lock.indexOf(uid) == -1) {
+        this.button_lock.push(uid);
+      }
+    },
+    remove(uid) {
+      this.$root.$refs.Navbar_component.remove(uid);
+    },
+    Add(uid) {
+      this.$root.$refs.Navbar_component.Add(
+        this.cards
+          .map((item) => {
+            return item.uid == uid ? item : null;
+          })
+          .filter((el) => el !== null)
+      );
+    },
     SORT(text, category, sale) {
       this.Sortedproducts = [];
       let contex = this;
@@ -231,6 +310,11 @@ export default {
 </script>
 
 <style scoped>
+.card-button-white {
+  width: 100%;
+  height: 60px;
+  background: #ffffff;
+}
 #notFounded {
   padding-top: 20%;
   text-align: center;
@@ -278,7 +362,7 @@ export default {
   text-transform: uppercase;
   color: #000000;
 }
-@media (max-width: 1075px) {
+@media (max-width: 1099px) {
   #card0 {
     margin-top: 0px;
   }
